@@ -28,7 +28,7 @@ For a bare bones example without the EZBLE wrapper, take a look at [SwiftLinuxGA
 * [PureSwift/GATT](https://github.com/PureSwift/GATT) - Bluetooth Generic Attribute Profile (GATT) for Swift
 
 
-# Usage
+# EZBLE Usage
 
 Basically, you just need to create a `Peripheral` class and one or more `Service` classes. 
 
