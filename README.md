@@ -17,11 +17,10 @@ For a bare bones example without the EZBLE wrapper, take a look at [SwiftLinuxGA
 
 # Testing
 
-I'm using [BlueSee BLE Debugger](https://apps.apple.com/us/app/bluesee-ble-debugger/id1336679524?mt=12) to test the BLE connection and verify that read/write works on the example customer characteristic.
+On mac: [BlueSee BLE Debugger](https://apps.apple.com/us/app/bluesee-ble-debugger/id1336679524?mt=12)
+On iPhone: https://apps.apple.com/us/app/nrf-connect/id1054362403
 
-![Device Log](/BlueSeeDeviceLog.png)
-
-![Read and Write](/BlueSeeReadWrite.png)
+* The nRF Connect app is nice because you can subscribe to notifications
 
 # Dependencies
 
