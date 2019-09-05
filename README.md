@@ -18,7 +18,7 @@ For a bare bones example without the EZBLE wrapper, take a look at [SwiftLinuxGA
 # Testing
 
 * On mac: [BlueSee BLE Debugger](https://apps.apple.com/us/app/bluesee-ble-debugger/id1336679524?mt=12)
-* On iPhone: https://apps.apple.com/us/app/nrf-connect/id1054362403
+* On iPhone: [nRF Connect](https://apps.apple.com/us/app/nrf-connect/id1054362403)
 
 *The nRF Connect app is nice because you can subscribe to notifications*
 
