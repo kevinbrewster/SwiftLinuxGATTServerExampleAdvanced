@@ -9,6 +9,7 @@ import Foundation
 import Bluetooth
 import GATT
 import BluetoothLinux
+import SwiftLinuxBLE
 
 
 extension TemperatureService {
@@ -17,33 +18,27 @@ extension TemperatureService {
     static let rxUUID = BluetoothUUID(rawValue: "88d738cc-bdd0-485b-b197-b7186ff534e6")!
 }
 
-final class TemperatureService : Service {
-    let peripheral: Peripheral
-
+final class TemperatureService : SwiftLinuxBLE.Service {
     let uuid = BluetoothUUID(rawValue: "88d738cc-bdd0-485b-b197-b7186ff534e4")!
     
+    
     // Characteristics
-    var temperature = Characteristic(0.0, TemperatureService.temperatureUUID, [.read, .notify])
-    var tx = Characteristic(Data(), TemperatureService.txUUID, [.write])
-    var rx = Characteristic(Data(), TemperatureService.rxUUID, [.read, .notify])
+    @SwiftLinuxBLE.Characteristic(uuid: TemperatureService.temperatureUUID, [.read, .notify])
+    var temperature = 7.0
+       
+    @SwiftLinuxBLE.Characteristic(uuid: TemperatureService.txUUID, [.write])
+    var tx = Data()
     
-    var characteristicKeyPaths: [AnyKeyPath] {
-        return [\TemperatureService.temperature, \TemperatureService.tx, \TemperatureService.rx]
-    }
+    @SwiftLinuxBLE.Characteristic(uuid: TemperatureService.rxUUID, [.read, .notify])
+    var rx = Data()
     
-    var fakeTemperatureDataTimer: DispatchSourceTimer?
     
-    init(peripheral: Peripheral) {
-        self.peripheral = peripheral
-        
-        tx.observe {
-            // This is a completely useless example: When tx is written to, the rx value is set
-            self.rx.value = $0
-        }
-        
+    
+    init() {
         setupFakeTemperatureDataTimer()
     }
     
+    var fakeTemperatureDataTimer: DispatchSourceTimer?
     func setupFakeTemperatureDataTimer() {
         // Every 2 seconds, increment the timer by 1
         let queue = DispatchQueue(label: "com.domain.app.timer")
@@ -51,7 +46,8 @@ final class TemperatureService : Service {
         fakeTemperatureDataTimer?.schedule(deadline: .now(), repeating: 2.0)
         fakeTemperatureDataTimer?.setEventHandler { [weak self] in
             guard let self = self else { return }
-            self.temperature.value = self.temperature.value + 1
+            self.temperature = self.temperature + 1
+            //NSLog("Changing temperature = \(self.temperature) (\(self._temperature.data))")
         }
         fakeTemperatureDataTimer?.resume()
     }
