@@ -16,7 +16,7 @@ public final class ThermometerPeripheral : SwiftLinuxBLE.Peripheral {
     public init(hostController: HostController) throws {
         peripheral = try hostController.newPeripheral()
         
-        add(service: TemperatureService())
+        try add(service: TemperatureService())
                 
         // Start peripheral
         try peripheral.start()
