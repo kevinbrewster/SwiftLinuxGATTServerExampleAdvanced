@@ -1,12 +1,10 @@
 # SwiftLinuxGATTServerExampleAdvanced
 
-This is a simple example of how to create a Bluetooth 4.0 (BLE) peripheral (aka GATT server) on Linux (e.g. on a Raspberry Pi) using Swift and the [PureSwift BluetoothLinux library](https://github.com/PureSwift/BluetoothLinux).
-
-This includes a lightweight convenience wrapper for the PureSwift Bluetooth API, tentatively called "EZBLE", which defines a few protocols to quickly setup services and characteristics using properties and keypaths.
+This is a simple example of how to create a Bluetooth 4.0 (BLE) peripheral (aka GATT server) on Linux (e.g. on a Raspberry Pi) using Swift and the [SwiftLinuxBLE](https://github.com/kevinbrewster/SwiftLinuxBLE) wrapper for the [PureSwift BluetoothLinux library](https://github.com/PureSwift/BluetoothLinux).
 
 This example sets up a single BLE peripheral with a single service.
 
-For a bare bones example without the EZBLE wrapper, take a look at [SwiftLinuxGATTServerExample](https://github.com/kevinbrewster/SwiftLinuxGATTServerExample)
+For a bare bones example without the SwiftLinuxBLE wrapper, take a look at [SwiftLinuxGATTServerExample](https://github.com/kevinbrewster/SwiftLinuxGATTServerExample)
 
 # Installation for Raspberry Pi
 
@@ -26,28 +24,7 @@ For a bare bones example without the EZBLE wrapper, take a look at [SwiftLinuxGA
 
 * [PureSwift/BluetoothLinux](https://github.com/PureSwift/BluetoothLinux) - Pure Swift Linux Bluetooth Stack
 * [PureSwift/GATT](https://github.com/PureSwift/GATT) - Bluetooth Generic Attribute Profile (GATT) for Swift
-
-
-# EZBLE Usage
-
-Basically, you just need to create a `Peripheral` class and one or more `Service` classes. 
-
-In the `Service` class you create properties for each characteristic you support and then you include the keyPath for each characteristic in the `characteristicKeyPaths` property. 
-
-The EZBLE extensions will take care of the rest.
-
-```
-let uuid = BluetoothUUID(rawValue: "88d738cc-bdd0-485b-b197-b7186ff534e4")!
-
-// Characteristics
-var temperature = Characteristic(0.0, TemperatureService.temperatureUUID, [.read, .notify])
-var tx = Characteristic(Data(), TemperatureService.txUUID, [.write])
-var rx = Characteristic(Data(), TemperatureService.rxUUID, [.read, .notify])
-
-var characteristicKeyPaths: [AnyKeyPath] {
-    return [\TemperatureService.temperature, \TemperatureService.tx, \TemperatureService.rx]
-}
-```
+* [SwiftLinuxBLE](https://github.com/kevinbrewster/SwiftLinuxBLE) - Convenience wrapper for above
 
 # Helpful Links
 
